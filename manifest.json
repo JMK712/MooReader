@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "静读",
+  "version": "1.3.0",
+  "description": "为当前阅读页提供简洁、可调节的阅读模式。",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://jinghecx.com/*",
+    "https://wx-hz.book.qq.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "打开或关闭静读模式",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://jinghecx.com/responsive/read*",
+        "https://wx-hz.book.qq.com/pages/read/read*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["reader.css"],
+      "matches": [
+        "https://jinghecx.com/*",
+        "https://wx-hz.book.qq.com/*"
+      ]
+    }
+  ]
+}
